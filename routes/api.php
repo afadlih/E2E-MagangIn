@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthControllerApi;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,12 @@ Route::get('/provinsi', [App\Http\Controllers\Api\ProvinsiController::class, 'ge
     Route::get('/desa/{id}', [App\Http\Controllers\Api\DesaController::class, 'getListDesaByKecamatanId'])->name('desa');
 Route::get('/wilayah/search', [\App\Http\Controllers\Api\WilayahController::class, 'searchLocations'])->name('wilayah.search');
 //});
+
+// auth API 
+Route::post('/login', [AuthControllerApi::class, 'login']);
+Route::post('/register/mahasiswa', [AuthControllerApi::class, 'registerMahasiswa']);
+Route::post('/register/dosen', [AuthControllerApi::class, 'registerDosen']);
+Route::middleware('auth:sanctum')->post('/logout', [AuthControllerApi::class, 'logout']);
+Route::middleware('auth:sanctum')->get('/user', [AuthControllerApi::class, 'getUser']);
+Route::get('/user', [AuthControllerApi::class, 'getUser'])->middleware('auth:sanctum');
+Route::post('/logout', [AuthControllerApi::class, 'logout'])->middleware('auth:sanctum');
