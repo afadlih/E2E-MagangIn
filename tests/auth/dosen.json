@@ -2,34 +2,20 @@
   "cookies": [
     {
       "name": "XSRF-TOKEN",
-<<<<<<< HEAD
-      "value": "eyJpdiI6InVzdkpaZVNvNGNXMHFmZ1BPR3RQNVE9PSIsInZhbHVlIjoiQkNTTHRnZ3AvMVNGQ3A4OG1JK0VUYTJwWVB1dGdGVDhlM2l2LysxbmQ0M1gyc2tUOHN4cWhvclBoR1JOKzZHL1oyZ2dNdGpQeDhXcXlJSkxteHcrclp5Wko0bmlobEYvc0hqV0tCRlpsS0NaTlRCMDRhRFBsei8xRXdJMG5nZzEiLCJtYWMiOiJiM2MzN2U5N2VkZTBiYjFlNmM3ZWY2YjcxNTczMjYxYjc4MWFiNjUwMThhYWVlZDhiMTU3YzM5ZjdiNmJiYWI0IiwidGFnIjoiIn0%3D",
+      "value": "eyJpdiI6IjNITXpkVEllWjlCeTNRYlpOVThhSWc9PSIsInZhbHVlIjoiVVB2QXlla0dIc2M1dFJDdFBpZjJTZWRmNmZJK1RZMzVjOEN6aTUrTnFNZTEzYUdLQUxRUGhRN3k4YUEwdjFtcnlVRnROMHZDK0twaVhYOFRqbXdoa0FRSVlCLy9WeFVUOCszVTVKQjhrcUlDQk1XcXZOWXdZOEh3QlNqOTFvTTQiLCJtYWMiOiIxNjUwOTE2MDQ5NzU4MzdiNTZiNDVmNGZlNGY3ODI3YmNkYjQxM2JhMTRjYjk4NzA2OTlmNmY1ZWM2MjU5NGQyIiwidGFnIjoiIn0%3D",
       "domain": "localhost",
       "path": "/",
-      "expires": 1762184588.754399,
-=======
-      "value": "eyJpdiI6IlV0Y1kyZVpubVpSeGFJVVZDd2JERFE9PSIsInZhbHVlIjoiYjBya0ppZTFVcU9hN0ZJbURYeXprUDc1ZnR3QjJ6MlFSSjc0M2dRYTZsLzVkQzBreEdkZngva1JyNHlDVFNRd2puY1ZDaFpBOW5xMHI1dkx1QTlVNURIa2hKLzZQYjJaSG81TDAvM2t5MzMvVFhHQW9CRXpuZ3lrUndDeFluMVYiLCJtYWMiOiIzMTI3NGRmNDQ1N2IzMTkzZjc5ZDNiZWVmYjcxZDUwZDVkOGY1NjJhN2RmN2ExMmE5YzcwNzkxMjAzMzZlYzZhIiwidGFnIjoiIn0%3D",
-      "domain": "localhost",
-      "path": "/",
-      "expires": 1762178763.38254,
->>>>>>> upstream/main
+      "expires": 1762227095.218243,
       "httpOnly": false,
       "secure": false,
       "sameSite": "Lax"
     },
     {
       "name": "laravel_session",
-<<<<<<< HEAD
-      "value": "eyJpdiI6InJYMnpVMEh0MHZuUUJiYzM1YnJXZmc9PSIsInZhbHVlIjoid3lPOUtlVGE2QlBuZit1TUlQZFhiRGJMVlZMSmg5a2kwaERyMjBBczRkU255RUJBSytoU1hqUHBXYkEvblE0YjVRdFM2NlhxcFl0QzlNU3plWUs5aTA5LytQSUVpL1QwbS92OFI2ODBZWW9XZUM2ZlcwNG54c2RIdkl3bnQ5TysiLCJtYWMiOiI0NmE1ZWNjODgzMzc2MDQ0YzM0NGVhMjYyNDAzMjY3YzdkNjk1MTk0OGY0NjE3YmJjNjVlNDQ5ODk0ZDcxOGM2IiwidGFnIjoiIn0%3D",
+      "value": "eyJpdiI6Ik4rSVFMZ0hRZXZZUGVGeVhLdG5Wc0E9PSIsInZhbHVlIjoiemlKbEUzR0F3SDFKWUhoc05xaFdFcXJFSlFEbmlJOU1HU3EyYTBnMW0vbDhjT1Z2V3pIekFXUG50MWc2cHFSbk50UWo4R3kxMDF3ekR5T0xwditkU2c1V0JLaklUV21kVGUvczVQOUU0YlF0N1h5aWE3REZGVmtCMlQ0Y0VaaUUiLCJtYWMiOiIyY2I5MWM5MTdiZDBkMjNmODNhYTc0MGYxODJlZDQ4ZDU0MzcyMmQzYjM0NTBmZTk5NTNkM2VkMDVhOGFhMmZiIiwidGFnIjoiIn0%3D",
       "domain": "localhost",
       "path": "/",
-      "expires": 1762184588.754536,
-=======
-      "value": "eyJpdiI6Ikd4eW91Z0wreUk3NEhVWlp5YVgwN3c9PSIsInZhbHVlIjoicDNjNnhydFViOXNvV0k5NUNNcXpQaENBU3U2ZDY1aC9MYUdZOU1WUzBNejFlV2JnVk4zTjBJcUp2bzZmczhMTmVoL1FTNGpoL2MyS0RmVUZtSnlxNjZYZ241YVZrVEd1SU9ORUsrbkdGbEtzaklkSVhWTTl0V1phNTIvcFN0TnQiLCJtYWMiOiI2MDFhYzM3MDI2YzA4NGQ1ZTEzNTkwMzI4N2E0YjY5NmExOWJiZDZmM2UyM2I2OTA3N2I2OTcyOGVkZTFhYzVhIiwidGFnIjoiIn0%3D",
-      "domain": "localhost",
-      "path": "/",
-      "expires": 1762178763.382623,
->>>>>>> upstream/main
+      "expires": 1762227095.218325,
       "httpOnly": true,
       "secure": false,
       "sameSite": "Lax"
