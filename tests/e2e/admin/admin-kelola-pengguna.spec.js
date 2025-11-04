@@ -1,58 +1,80 @@
-/**
- * E2E Test: Admin - Kelola Data Admin (CRUD)
- * Deskripsi: Tambah, Edit, dan Hapus data admin dengan modal AJAX
- * Catatan:
- *  - Sidebar default dalam keadaan collapse → perlu di-expand dulu
- *  - Gunakan storageState (admin.json) untuk autentikasi otomatis
- */
-
 const { test, expect } = require('@playwright/test');
 
 // Gunakan session login admin agar tidak perlu login ulang
 test.use({ storageState: 'tests/auth/admin.json' });
 
-// ─────────────────────────────
-// Helper: Expand sidebar bila collapse
-// ─────────────────────────────
+/* ─────────────────────────────
+   Helper: Expand Sidebar Kaiadmin
+───────────────────────────── */
 async function expandSidebar(page) {
-  console.log('🧭 Memeriksa kondisi sidebar...');
+  console.log('🧭 Memeriksa kondisi sidebar Kaiadmin...');
 
-  const body = page.locator('body');
-  const isCollapsed = await body.evaluate(el => el.classList.contains('sidebar-collapse'));
+  const wrapper = page.locator('.wrapper');
+  const isCollapsed = await wrapper.evaluate(el =>
+    el.classList.contains('sidebar_minimize') ||
+    el.classList.contains('sidebar-collapse')
+  );
 
-  if (isCollapsed) {
-    console.log('   ➤ Sidebar terdeteksi collapse, mencoba expand...');
-    const toggleBtn = page.locator('[data-widget="pushmenu"], .nav-toggle');
-
-    if (await toggleBtn.count() > 0) {
-      await toggleBtn.first().click({ force: true });
-      await page.waitForTimeout(1000);
-    } else {
-      console.warn('⚠️ Tidak menemukan tombol toggle sidebar!');
-    }
+  if (!isCollapsed) {
+    console.log('   ✓ Sidebar sudah terbuka');
+    return;
   }
 
-  const isNowExpanded = !(await body.evaluate(el => el.classList.contains('sidebar-collapse')));
-  console.log(isNowExpanded ? '   ✓ Sidebar terbuka' : '   ⚠️ Sidebar masih collapse!');
+  console.log('   ➤ Sidebar terdeteksi collapse, mencoba expand...');
+
+  // Lokasi tombol toggle sidebar sesuai layout Kaiadmin
+  const toggleBtn = page.locator('.nav-toggle .toggle-sidebar');
+
+  if (await toggleBtn.count() > 0) {
+    try {
+      await toggleBtn.first().click({ force: true });
+      await page.waitForTimeout(1000);
+    } catch (err) {
+      console.warn('⚠️ Gagal klik tombol toggle-sidebar:', err.message);
+    }
+  } else {
+    console.warn('⚠️ Tombol .toggle-sidebar tidak ditemukan! Gunakan fallback JS.');
+    await page.evaluate(() => {
+      const wrapper = document.querySelector('.wrapper');
+      wrapper?.classList.remove('sidebar_minimize', 'sidebar-collapse');
+      wrapper?.classList.add('sidebar-open');
+    });
+  }
+
+  const stillCollapsed = await wrapper.evaluate(el =>
+    el.classList.contains('sidebar_minimize') ||
+    el.classList.contains('sidebar-collapse')
+  );
+
+  if (!stillCollapsed) {
+    console.log('   ✓ Sidebar berhasil di-expand');
+  } else {
+    console.warn('⚠️ Sidebar masih collapse setelah percobaan!');
+  }
 }
 
-// ─────────────────────────────
-// Helper: Buka halaman Data Admin
-// ─────────────────────────────
+/* ─────────────────────────────
+   Helper: Buka halaman Data Admin
+───────────────────────────── */
 async function bukaHalamanDataAdmin(page) {
   console.log('➡️ Navigasi ke dashboard admin...');
   await page.goto('http://localhost/E2E-MagangIn/public/dashboard-admin');
   await page.waitForLoadState('networkidle');
 
+  const navbar = page.locator('.navbar');
+  await expect(navbar).toBeVisible();
+  console.log('   ✓ Navbar visible - User authenticated');
+
   // Pastikan sidebar terbuka
   await expandSidebar(page);
 
+  // Klik menu utama
   console.log('➡️ Klik menu "Manajemen Pengguna"...');
   const menuManajemen = page.locator('a:has-text("Manajemen Pengguna")');
   await menuManajemen.waitFor({ state: 'visible', timeout: 5000 });
   await menuManajemen.click();
-  await page.waitForTimeout(500);
 
+  // Klik submenu
   console.log('➡️ Klik submenu "Data Admin"...');
   const menuDataAdmin = page.locator('a[href*="/admin"]:has-text("Data Admin")');
   await menuDataAdmin.waitFor({ state: 'visible', timeout: 5000 });
@@ -63,10 +85,11 @@ async function bukaHalamanDataAdmin(page) {
   console.log('✅ Halaman Data Admin terbuka');
 }
 
-// ─────────────────────────────
-// TEST CASES
-// ─────────────────────────────
+/* ─────────────────────────────
+   TEST CASES: CRUD Admin
+───────────────────────────── */
 test.describe('Admin - Kelola Data Admin (CRUD)', () => {
+
   // 1️⃣ Tambah Data Admin
   test('Tambah data admin baru', async ({ page }) => {
     test.setTimeout(90000);
@@ -79,7 +102,6 @@ test.describe('Admin - Kelola Data Admin (CRUD)', () => {
     console.log('✅ Modal tambah admin muncul');
 
     const random = Math.floor(Math.random() * 1000);
-    console.log('➡️ Isi form tambah admin...');
     await page.fill('#username', `admin_test_${random}`);
     await page.fill('#password', 'password123');
     await page.fill('#nama', `Admin Testing ${random}`);
@@ -112,7 +134,6 @@ test.describe('Admin - Kelola Data Admin (CRUD)', () => {
     await page.waitForSelector('#myModal .modal-content form');
     console.log('✅ Modal edit muncul');
 
-    console.log('➡️ Edit field nama dan telp...');
     await page.fill('#nama', 'Admin Edited');
     await page.fill('#telp', '08999999999');
 
